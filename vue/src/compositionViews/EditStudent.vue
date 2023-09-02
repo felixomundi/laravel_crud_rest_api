@@ -34,8 +34,7 @@
                                         <input type="email"  v-model="model.students.email" name="email" class="form-control">
                                     </div>
                                     <div class="col-md-6">
-                                       <!-- <button class="btn btn-primary" @click="updateStudent">Submit</button> -->
-                                       <button>Update</button>
+                                        <button class="btn btn-primary" @click="updateStudent">Submit</button>
                                     </div>
                                 </div>
                               </form>
@@ -48,12 +47,9 @@
 </template>
 <script>
 import axios from 'axios';
-// import router from '../router';
-import { useStudentsStore } from '../stores/students';
-import { mapStores } from 'pinia';
+import router from '../router';
 export default {
     name: "updateStudent", 
-    
     data() {
         return {
             erroList: null,            
@@ -65,18 +61,28 @@ export default {
             }
         }
     },
-    computed:{
-        ...mapStores(useStudentsStore)
-    },
-    // mounted() {    
-    // const id = this.$route.params.id
-    // this.useStudentsStore.getSingleStudent(id)
-    //  },
+    mounted() {    
+    const id = this.$route.params.id
+    this.getStudentData(id)
+     },
     methods: {
-        // async getStudentData($id) {                         
-                  
-                   
-        // },   
+
+        async getStudentData($id) {                         
+            try {
+                let url = `http://localhost:8000/api/students/${$id}/edit`;
+                const response = await axios.get(url);                
+                this.model.students = response.data.student;
+
+            } catch (error) {
+                console.log(error)       
+                if (error.response) {
+                    if (error.response.status === 404) {
+                        alert(error.response.data.message);  
+                        router.push({ name:"students"})                        
+                    }
+                }         
+            }            
+        },   
 
         async updateStudent(e) {
             e.preventDefault();           

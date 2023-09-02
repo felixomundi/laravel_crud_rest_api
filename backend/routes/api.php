@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\StudentController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\AuthenticationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::controller(StudentController::class,)-> group(function(){
 Route::get("/students","index");
@@ -29,3 +29,13 @@ Route::delete("/students/{id}/delete","destroy");
 });
 
 
+// Auth Routes
+Route::post("/users/register", [AuthenticationController::class, "register"]);
+Route::post("/users/login", [AuthenticationController::class, "login"])->name("login");
+
+Route::middleware("auth:api")->group(function(){
+    Route::get("/user", [AuthenticationController::class, "getUser"]);
+    Route::post("/users/logout", [AuthenticationController::class, "logout"]);
+
+
+});
