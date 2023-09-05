@@ -1165,6 +1165,11 @@ domexception@^4.0.0:
   dependencies:
     webidl-conversions "^7.0.0"
 
+dotenv@^16.3.1:
+  version "16.3.1"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.3.1.tgz#369034de7d7e5b120972693352a3bf112172cc3e"
+  integrity sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==
+
 editorconfig@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/editorconfig/-/editorconfig-1.0.4.tgz#040c9a8e9a6c5288388b87c2db07028aa89f53a3"
@@ -1907,6 +1912,11 @@ mlly@^1.2.0, mlly@^1.4.0:
     pkg-types "^1.0.3"
     ufo "^1.1.2"
 
+mosha-vue-toastify@^1.0.23:
+  version "1.0.23"
+  resolved "https://registry.yarnpkg.com/mosha-vue-toastify/-/mosha-vue-toastify-1.0.23.tgz#eaa5de2a4ee0ca1167421132a42c1ac55ebb7e26"
+  integrity sha512-K9fij3e3H+E/Lj82ISrgmyKrtM5RNmtZC/KG/KH47+oZGmzAkN/Zuz39kBdT/Mp8OxaHuIWQntEUMP+HdmK1xA==
+
 ms@2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
@@ -2441,6 +2451,11 @@ type-fest@^0.20.2:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.20.2.tgz#1bf207f4b28f91583666cb5fbd327887301cd5f4"
   integrity sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==
 
+type-fest@^4.2.0:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-4.3.1.tgz#5cb58cdab5120f7ab0b40cfdc35073fb9adb651d"
+  integrity sha512-pphNW/msgOUSkJbH58x8sqpq8uQj6b0ZKGxEsLKMUnGorRcDjrUaLS+39+/ub41JNTwrrMyJcUB8+YZs3mbwqw==
+
 ufo@^1.1.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/ufo/-/ufo-1.2.0.tgz#28d127a087a46729133fdc89cb1358508b3f80ba"
@@ -2483,6 +2498,14 @@ util-deprecate@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
+
+vee-validate@^4.11.3:
+  version "4.11.3"
+  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-4.11.3.tgz#b95cff30c46bf49102ef49141fd77d36b96edf7f"
+  integrity sha512-YhWORdZRE1GL6vXKj3r9f+Y8fJH5JMwMUJ4DFS44+WcTtiNXggyE3pyJPlZBqS9AgYGZ47EOv4UczkLxHqufiw==
+  dependencies:
+    "@vue/devtools-api" "^6.5.0"
+    type-fest "^4.2.0"
 
 vite-node@0.34.2:
   version "0.34.2"

@@ -1,4 +1,4 @@
-// import './assets/main.css'
+import './assets/style.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { createApp, markRaw } from 'vue'
@@ -6,12 +6,13 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle"
-
+import  './axios'
 // import { library } from '@fortawesome/fontawesome-svg-core'
 // import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 // import { faShopify } from '@fortawesome/free-brands-svg-icons'
 // library.add(faTwitter,faShopify)
+
 
 const app = createApp(App)
 const pinia = createPinia()
@@ -20,7 +21,7 @@ pinia.use(({ store }) => {
   })
 app.use(pinia)
 app.use(router)
-app.use(bootstrap)
+// app.use(bootstrap)
 // app.component('font-awesome-icon', FontAwesomeIcon)
 
 app.mount('#app')

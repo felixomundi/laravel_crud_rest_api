@@ -1,4 +1,20 @@
+<script setup>
+import { onMounted } from 'vue';
+import { RouterLink } from 'vue-router';
+import { useauthStore } from '../stores/auth';
+
+const auth = useauthStore();
+onMounted(async() => {  
+  await auth.getUser();
+
+});
+
+
+</script>
+
 <template>
+ 
+    
  <div>
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
@@ -68,11 +84,10 @@
     </div>
   </div>
  </div>
-</template>
-<script>
-import { RouterLink } from 'vue-router';
 
-</script>
+
+</template>
+
 <style scoped>
 a{
   cursor: pointer;
