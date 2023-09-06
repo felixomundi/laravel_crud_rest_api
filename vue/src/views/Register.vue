@@ -63,7 +63,7 @@ onMounted(async () => {
                         </div>
                        <div class="mt-3">
                        <p>
-                        <RouterLink to="#" class="forgot flex-start" >Forgot Password?</RouterLink>
+                        <RouterLink to="/forgot-password" class="forgot flex-start" >Forgot Password?</RouterLink>
                         <RouterLink to="/login" class="register">Sign In</RouterLink>
                        </p>
                        </div>

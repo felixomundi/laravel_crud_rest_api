@@ -6,23 +6,30 @@ export const useauthStore = defineStore('auth',  {
     state: () => ({
         authUser:null,        
         loading: false,
-        errors:[],
+        errors: [],
+        message: null,
     }),
     getters: {
-       user:(state)=> state.authUser
-      
+        user: (state) => state.authUser    
     },
     actions: { 
         async getToken() {
-            await axios.get("/sanctum/csrf-cookie");
+            try {
+                await axios.get("/sanctum/csrf-cookie");
+            } catch (error) {
+                if (error.response) {
+                    console.log(error.response)
+                }
+                
+            }
+            
         },
-        async login(data) {
-           
+        async login(data) {            
             this.errors = [];
             try {
-                // this.getToken();
+                await this.getToken();
                 this.loading = true;
-                await axios.post("/login", data);              
+                await axios.post("/api/login", data);              
                 this.loading = false;
                 this.errors = [];                                
                 router.push({ name: "home" });
@@ -42,7 +49,7 @@ export const useauthStore = defineStore('auth',  {
         async getUser() {           
             
             try {
-                const response = await axios.get("/user");
+                const response = await axios.get("/api/user");
                 this.loading = true;
                 if (response.status === 200) {                
                     this.authUser = response.data;    
@@ -66,7 +73,7 @@ export const useauthStore = defineStore('auth',  {
         },
         async logout() {
             try {
-                const response = await axios.post("/logout");
+                const response = await axios.post("/api/logout");
                 if (response.status === 204) {
                     this.authUser = null;
                     alert("Logout Successful")
@@ -82,7 +89,8 @@ export const useauthStore = defineStore('auth',  {
             this.errors = [];
             this.loading = true;
             try {
-                await axios.post("/register", data);
+                await this.getToken();
+                await axios.post("/api/register", data);
                 this.loading = false;
                 this.errors = [];                                
                 router.push({ name: "home" });
@@ -98,9 +106,46 @@ export const useauthStore = defineStore('auth',  {
                 }
                 
             }
-        }
-
-
+        },
+        async forgotpassword(data) {
+            this.errors = [];
+            try {
+                await this.getToken();
+                this.loading = true;
+                const response = await axios.post("/api/forgot-password", data);
+                this.message = response.data.status;
+                this.loading = false;
+                this.errors = [];
+                
+            } catch (error) {
+                this.loading = false;
+                if (error.response) {
+                    if (error.response.status === 422) {
+                        this.errors = error.response.data.errors;
+                    }
+                }
+            }
+            
+        },
+        async resetpassword(data) {
+            this.errors = [];
+            try {
+                this.loading = true;
+                await axios.post("/api/reset-password", data);
+                this.loading = false;
+                this.errors = [];
+                this.router.push({ name: "home" });                
+            } catch (error) {
+                this.loading = [];
+                if (error.response) {
+                    if (error.response.status === 422) {
+                        this.errors = error.response.data.errors;
+                    }
+                }
+                
+            }
+            
+        },
     },
         
 }) 

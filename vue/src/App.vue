@@ -31,7 +31,7 @@ const logout = auth.logout;
             {{ auth.user?.name  }}
           </a>
           <ul class="dropdown-menu">
-            <li><RouterLink class="dropdown-item" to="#">Profile</RouterLink></li>
+            <li><RouterLink class="dropdown-item" to="/profile">Profile</RouterLink></li>
             <li><RouterLink class="dropdown-item" to="#">
               <button class="btn btn-warning" @click="logout">Logout</button>
 

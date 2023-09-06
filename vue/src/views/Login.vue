@@ -2,7 +2,6 @@
 import { onMounted } from 'vue';
 import { useauthStore } from '../stores/auth';
 import { storeToRefs } from 'pinia';
-import router from '../router';
 
 let userdata = {
     email: "",
@@ -11,22 +10,8 @@ let userdata = {
 };
 const auth = useauthStore();
 let { loading, authUser } = storeToRefs(auth);
-onMounted(async () => {    
-    try {
-        const response = await auth.getUser(); 
-    if (response.status === 200) {
-        loading = false;
-        authUser = response.data;
-        router.push({name:"home"});
-    }
-    return response;
-    } catch (error) {       
-        if (error.response) {
-            if (error.response.status === 401) {                      
-           handleLogin();
-         }
-        }
-    }
+onMounted(async () => {       
+    await auth.getUser();
 
 });
 
@@ -73,7 +58,7 @@ onMounted(async () => {
                     </div>
                    <div class="mt-3">
                    <p>
-                    <RouterLink to="#" class="forgot flex-start" >Forgot Password?</RouterLink>
+                    <RouterLink to="/forgot-password" class="forgot flex-start" >Forgot Password?</RouterLink>
                     <RouterLink to="/register" class="register">Create New Account</RouterLink>
                    </p>
                    </div>

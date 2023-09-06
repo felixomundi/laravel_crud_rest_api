@@ -15,3 +15,8 @@ Millicent Chemeli
 chemelimillicent94@gmail.com
 #12345678
 jovanie hbd
+
+# navigation guards
+# protect routes
+# profile page update
+# loading
