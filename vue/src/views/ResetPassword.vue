@@ -2,7 +2,9 @@
 import { onMounted } from 'vue';
 import { useauthStore } from '../stores/auth';
 import { storeToRefs } from 'pinia';
+import { useRoute } from 'vue-router';
 const auth = useauthStore();
+const route = useRoute();
 
 let $email = route.query.email;
 let $token = route.params.token;
@@ -18,8 +20,7 @@ const handleResetPassword = async () => {
     await auth.resetpassword(userdata);   
 }
 onMounted(async () => {
-    await auth.getUser();
-      
+    await auth.getUser();      
 });
 </script>
 <template>
@@ -29,17 +30,21 @@ onMounted(async () => {
               <div class="col-md-7 pb-3">
                     <div class="form">
                         <div class="text-start pt-0">
-                        <p class="text-success">Forgot Password</p>
+                        <p class="text-success">Reset Password</p>
                         <div v-if="auth.message">
                             <p class="text-success"> <strong>{{ auth.message }}</strong> </p>
+                        </div>
+
+                        <div v-if="auth.errors.email">
+                            <p class="text-danger"> <strong>{{ auth.errors.email[0] }}</strong> </p>
                         </div>
                     </div>
                         <form @submit.prevent="handleResetPassword">
                             <div class="row">                                
                                 <div class="col-md-12">
-                                    <label for="password">Password</label>
+                                    <label for="password">New Password</label>
                                     <input type="password" name="password" v-model="userdata.password" class="form-control">
-                                    <div v-if="auth.errors.email">
+                                    <div v-if="auth.errors.password">
                                         <span class="text-danger"> <strong>{{ auth.errors.password[0] }}</strong></span>
                                     </div>
                                 </div>
@@ -47,7 +52,7 @@ onMounted(async () => {
                                 <div class="col-md-12">
                                     <label for="password_confirmation">Confirm Password</label>
                                     <input type="password" name="password_confirmation" v-model="userdata.password_confirmation" class="form-control">
-                                    <div v-if="auth.errors.email">
+                                    <div v-if="auth.errors.password_confirmation">
                                         <span class="text-danger"> <strong>{{ auth.errors.password_confirmation[0] }}</strong></span>
                                     </div>
                                 </div>

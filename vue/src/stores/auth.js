@@ -131,12 +131,14 @@ export const useauthStore = defineStore('auth',  {
             this.errors = [];
             try {
                 this.loading = true;
-                await axios.post("/api/reset-password", data);
+                const response = await axios.post("/api/reset-password", data);
+                this.message = response.data.status;
+                alert(this.message);
                 this.loading = false;
                 this.errors = [];
-                this.router.push({ name: "home" });                
+                this.router.push({ name: "login" });                
             } catch (error) {
-                this.loading = [];
+                this.loading = false;
                 if (error.response) {
                     if (error.response.status === 422) {
                         this.errors = error.response.data.errors;
