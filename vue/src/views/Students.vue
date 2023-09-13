@@ -1,4 +1,4 @@
-<!-- <script setup>
+<script setup>
 import { RouterLink } from 'vue-router';
 import { useStudentsStore } from '../stores/students';
 import { onMounted } from 'vue';
@@ -6,7 +6,7 @@ const studentStore = useStudentsStore();
 onMounted(() => {
     studentStore.loadStudents();
 });
-</script> -->
+</script>
 
 <template>
     <div class="container py-5">

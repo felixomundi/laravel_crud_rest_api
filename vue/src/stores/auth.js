@@ -25,9 +25,10 @@ export const useauthStore = defineStore('auth',  {
             
         },
         async login(data) {            
-            this.errors = [];
+            this.errors = [];            
             try {
-                await this.getToken();
+                
+                await this.getToken();     
                 this.loading = true;
                 await axios.post("/api/login", data);              
                 this.loading = false;
@@ -46,15 +47,14 @@ export const useauthStore = defineStore('auth',  {
                 }               
             }
         },
-        async getUser() {           
-            
+        async getUser() {          
+            this.loading = true;
             try {
-                const response = await axios.get("/api/user");
-                this.loading = true;
+                const response = await axios.get("/api/user");               
                 if (response.status === 200) {                
                     this.authUser = response.data;    
                     this.loading = false;  
-                    this.router.push({ name: "home" });
+                    // this.router.push({ name: "home" });
                 }
                  
             } catch (error) {
@@ -65,7 +65,8 @@ export const useauthStore = defineStore('auth',  {
                     }
                     if (error.response.status === 401) {
                         this.loading = false;
-                        // this.router.push({ name: "login" });
+                        this.authUser = null;                        
+                        // this.router.push({ name: "login",  });
                     }       
                 }
                 
@@ -145,6 +146,25 @@ export const useauthStore = defineStore('auth',  {
                     }
                 }
                 
+            }
+            
+        },
+        async update_Profile(data) {
+            this.errors = [];
+            this.loading = true;
+            try {                
+                const response = await axios.put("/api/profile", data);               
+                if (response.status === 200) {
+                    this.loading = false;
+                }
+                
+            } catch (error) {
+                this.loading = false;
+                if (error.response) {
+                    if (error.response.status === 422) {
+                        this.errors = error.response.data.errors;
+                   }
+                }
             }
             
         },

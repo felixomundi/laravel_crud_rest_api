@@ -19,4 +19,23 @@ jovanie hbd
 # navigation guards
 # protect routes
 # profile page update
-# loading
+# loading 
+# verify email
+# swal
+
+
+# eduardo cart mgt
+https://www.youtube.com/watch?v=nBM5WTxJgD0
+
+# using the mouse
+clicking, right clicking and double clicking.
+opening files and folders.
+
+# microsoft word
+selecting text, copying, pasting.
+
+# running db seed.
+php artisan db:seed --class=ProductCategorySeeder
+
+# image crud
+https://www.youtube.com/watch?v=SRnxKpTV-MU&list=PL-OHVhAxtpSBY-X89ewvqbjbAJ-bW4rYk&index=22

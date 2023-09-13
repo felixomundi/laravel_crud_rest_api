@@ -1,28 +1,37 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Students from "../views/Students.vue"
-import Login from "../views/Login.vue"
-import Register from "../views/Register.vue"
-import Profile from "../views/Profile.vue"
-import ForgotPassword from "../views/ForgotPassword.vue"
-import ResetPassword from "../views/ResetPassword.vue"
+import Login from "../views/auth/Login.vue"
+import Register from "../views/auth/Register.vue"
+import Profile from "../views/auth/Profile.vue"
+import ForgotPassword from "../views/auth/ForgotPassword.vue"
+import ResetPassword from "../views/auth/ResetPassword.vue"
+import ProductDetail from "../views/products/ProductDetail.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      
+    },
+    {
+      path: '/product/:slug',
+      name: 'productDetail',
+      component: ProductDetail,
+      
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,      
     },
     {
       path: '/register',
       name: 'register',
-      component: Register
+      component: Register,
+     
     },
     {
       path: '/forgot-password',
@@ -38,7 +47,7 @@ const router = createRouter({
     {
       path: '/profile',
       name: 'profile',
-      component: Profile
+      component: Profile,    
     },
     {
       path: '/students',
@@ -48,21 +57,24 @@ const router = createRouter({
     {
       path: '/students/create',
       name: 'createStudent',
-      component: ()=>import("../views/CreateStudent.vue")
+      component: () => import("../views/CreateStudent.vue")
     },
 
     {
       path: '/about',
-      name: 'about',      
+      name: 'about',
       component: () => import('../views/AboutView.vue')
     },
 
     {
       path: '/students/:id/edit',
-      name: 'updateStudent',      
+      name: 'updateStudent',
       component: () => import('../views/EditStudent.vue')
     }
   ]
-})
+});
 
-export default router
+
+
+
+export default router;

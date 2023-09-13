@@ -15,7 +15,7 @@ export const useStudentsStore = defineStore('students', {
             let url = "http://localhost:8000/api/students";
                 const response = await axios.get(url);
                 this.students = response.data.students;
-                this.loading =false
+                this.loading = false;
         } catch (error) {
             
         }

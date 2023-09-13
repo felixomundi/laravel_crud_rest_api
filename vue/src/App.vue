@@ -7,7 +7,7 @@ const logout = auth.logout;
 
 
 <template>
-  <nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
+  <nav class="navbar navbar-expand-lg bg-light navbar-light sticky-top">
   <div class="container-fluid">
     <RouterLink class="navbar-brand" to="/">Ecommerce</RouterLink>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,6 @@ const logout = auth.logout;
     </div>
   </div>
 </nav>
-
 
   <RouterView />
 </template>
