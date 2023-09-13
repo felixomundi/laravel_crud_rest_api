@@ -3,6 +3,9 @@ import { onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useauthStore } from '../stores/auth';
 import { useProductsStore } from '../stores/products';
+import Footer from "./../components/Footer.vue"
+import Subscribe from "./../components/Subscribe.vue";
+
 const auth = useauthStore();
 const productStore = useProductsStore();
 onMounted(async() => {  
@@ -97,59 +100,14 @@ function getImage() {
   </div>
  </div>
  <!-- banner -->
+
  <!-- subscribe -->
-<div class="subscribe">
-  <div class="container py-4">
-    <div class="row justify-content-center align-items-center">
-      <div class="col-12">     
-      <form>
-          <div class="row">
-            <h4>Subscribe To Newsletter</h4>   
-            <p>New Subscibe to our newsletter</p>
-            <div class="col-md-4 mb-3">
-              <input type="text" placeholder="Your Name" class="form-control">
-            </div>
-            <div class="col-md-4 mb-3">
-              <input type="email" placeholder="Your Email" class="form-control">
-            </div>
-            <div class="col-md-4 ">
-              <button type="button"  class="form-control">Subscribe</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+ <Subscribe></Subscribe>
   <!-- subscribe -->
+
 <!-- footer -->
-<div class="footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3 mb-3">
-        <h4>Nyagaka Ecommerce</h4>
-      </div>
-      <div class="col-md-3 mb-3">
-        <h4>Pages</h4>
-        <p><a href="#">Cart</a></p>
-        <p><a href="#">Wishlist</a></p>        
-      </div>
-      <div class="col-md-3 mb-3">
-        <h4>Quick Links</h4>
-        <p><a href="#">Contact Us</a></p>
-        <p><a href="#">About Us</a></p>        
-      </div>
-      <div class="col-md-3 mb-3">
-        <h4>Social Links</h4>
-        <a href="#" ><i class="fab fa-facebook pr-2"></i></a>
-        <a href="#"> <i class="fab fa-youtube px-3"></i>  </a>    
-        <a href="#"> <i class="fab fa-twitter"></i></a>   
-      </div>
-      <div class="text-lg-center text-start">Copyright &copy 2023 </div>
-    </div>
-  </div>
-</div>
-<!--footer-->
+<Footer></Footer>
+<!-- footer-->
 
 </template>
 
@@ -245,41 +203,5 @@ height: 30px;
   color: #ffff;
 
 }
-.subscribe{
-  background-color: #D3D3D3;
-  margin-top: 0;
-  width: 100%;
-}
 
-/* t r b l */
-.subscribe form{
-  padding:  25px 0 30px 0;
-}
-
-@media only screen and (max-width: 590px ) {
-  .subscribe form{
-   margin-bottom: 30px;
-  }
-  
-}
-.subscribe button{
-  cursor: pointer;
-  background-color: #088178;
-  outline: none;
-  color: aliceblue;
-  padding: 7px;
-  box-shadow: none;
-}
-.subscribe input:focus{
-border: 2px solid red;
-outline: none;
-padding: none;
-box-shadow: none;
-}
-.footer{
-  width: 100%;
-  padding: 30px;
-  background-color: black;
-  color: #fff;
-}
 </style>
