@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3 mb-3 text-start">
-        <h4>Nyagaka Ecommerce</h4>
+        <h4><RouterLink to="/">Nyagaka Ecommerce</RouterLink></h4>
       </div>
       <div class="col-md-3 mb-3 text-start">
         <h4>Pages</h4>
@@ -16,7 +16,7 @@
         <p><a href="#">Contact Us</a></p>
         <p><a href="#">About Us</a></p>        
       </div>
-      <div class="col-md-3 mb-3 text-start">
+      <div class="col-md-3 mb-3 text-start social">
         <h4>Social Links</h4>
         <a href="#" ><i class="fab fa-facebook px-2"></i></a>
         <a href="#"> <i class="fab fa-youtube px-2"></i>  </a>    
@@ -28,4 +28,6 @@
 </div>
 <!--footer-->
 </template>
-<script></script>
+<script>
+import { RouterLink } from 'vue-router';
+</script>
