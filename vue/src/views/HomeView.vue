@@ -61,6 +61,13 @@ function getImage() {
           Loading ...
         </div>
       </div>
+      <div v-else-if="productStore.productErrors" class="row">
+      
+        <div class="text-center text-danger">
+          {{ productStore.productErrors }}
+        </div>
+        
+      </div>
 
       <div v-else-if="!productStore.productsLoading && productStore.products.length <0" class="row">
         <div>
@@ -72,8 +79,8 @@ function getImage() {
    <div v-else class="row">
     <div class="col-md-3 gap-4 prod mb-4" v-for="(product, index) in productStore.products" :key="index">
         <div class="card p-2">
-          <img :src="getImage() +product.image" alt="">
-          <h4><RouterLink to="#">{{product.name}}</RouterLink></h4>
+          <img :src="getImage() + product.image" alt="">
+          <h4><RouterLink :to="{path: '/product/'+product.slug }">{{product.name}}</RouterLink></h4>
           <p>${{ product.price }}</p>
           <button> <img src="../assets/images/cart-icon.png" alt=""> </button>
         </div>        
@@ -131,7 +138,7 @@ font-size:30px;
 font-weight: 800;
 color: #088178;
 margin-top: 20px;
-margin-bottom: 30px;
+margin-bottom: 20px;
 }
 
 .col-md-3.gap-4.prod{

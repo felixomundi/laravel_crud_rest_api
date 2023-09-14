@@ -18,7 +18,7 @@
     
   }
   .subscribe .subscribe-button{
-    width: 100%;
+    
     cursor: pointer;
     background-color: #088178;
     outline: none;
@@ -26,11 +26,11 @@
     padding: 7px;
     box-shadow: none;
     border: none;
-    border-radius: 1px;
+    border-radius: 2px;
   }
   
   .subscribe input:focus{
-  border: 2px solid red;
+  border: 2px solid #088178;
   outline: none;
   padding: none;
   box-shadow: none;
@@ -72,16 +72,13 @@
   .footer .social a i {
     height: 30px;
     height: 30px;
-    color: #fff;
-   
+    color: #fff;   
   }
-
   .footer .social a  {
     margin: 10px 10px 0 0;
     border: 1px solid #D3D3D3;
     border-radius: 3px;
     background-color: blue;
     height: 40px;
-    width: 40px;
-   
+    width: 40px;   
   }

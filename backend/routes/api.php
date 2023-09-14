@@ -1,28 +1,31 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+Route::middleware(['auth:sanctum'])->group(function (){
+  //cart routes
+Route::controller(CartController::class)->group(function (){
+    Route::get("/cart", "index");
+    Route::post("/add-to-cart", "create");
+});
+});
+
+
+//product routes
 Route::controller(ProductController::class)->group(function (){
 Route::post("/products/create", "store");
 Route::get("/products", "index");
 Route::get('/products/{slug}', "detail");
 });
+
 
 require __DIR__.'/auth.php';

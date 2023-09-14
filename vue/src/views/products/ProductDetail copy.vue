@@ -4,32 +4,16 @@ import Subscribe from "./../../components/Subscribe.vue";
 import { useProductsStore } from "../../stores/products";
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { useauthStore } from "../../stores/auth";
-import { useCartStore } from "../../stores/cart";
 const route = useRoute();
 const slug = route.params.slug; 
 const productStore = useProductsStore();
-const auth = useauthStore();
-const cartStore = useCartStore();
-
 onMounted(async () => {    
-    await auth.getUser();
     await productStore.fetchProduct(slug);
-    await cartStore.fetchCartItems();    
 });
-
-let data = {
-    "slug": slug,
-    "quantity":1,
-}
-
-const addToCart = async () => {
-    await cartStore.addToCart(data);
-};
 
 </script>
 <template>
- <div v-if="auth.loading || productStore.productsLoading || cartStore.cartLoading">
+ <div v-if="productStore.productsLoading">
 <div>Loading ...</div>
  </div>
  
@@ -68,7 +52,7 @@ const addToCart = async () => {
                          <!--carousel-->
                     </div>
                     <div class="col-md-7 product">
-                        <h2>{{productStore.product?.name}}</h2>
+                        <h2>Product Name</h2>
                         <div class="rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -76,16 +60,16 @@ const addToCart = async () => {
                             <i class="fa fa-star"></i>
                         </div>
                         <div class="prod-desc">
-                        <p>{{productStore.product?.description}}</p>
+                        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, omnis doloribus qui neque itaque tempora!</p>
                         </div>
-                        <h2>Ksh. {{productStore.product?.price}}</h2>
+                        <h2>$200</h2>
                         <div class="quantity">
                             <button class="decrease"><i class="fa fa-minus" ></i></button>
-                           <input type="number" min="1" v-model="data.quantity" readonly>
+                            <input type="text">
                             <button class="increase"><i class="fa fa-plus"></i></button>
                         </div>
                         <div class="buttons">
-                            <button @click.prevent="addToCart()"  class="button-1"><i class="fa fa-shopping-bag"></i></button>
+                            <button class="button-1"><i class="fa fa-shopping-bag" ></i></button>
                             <button><i class="fa fa-heart"></i></button>
                             <button><i class="fa fa-search"></i></button>
                         </div>
@@ -114,48 +98,20 @@ const addToCart = async () => {
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="row">
                         <h4>Product Description</h4>
-                        <p>{{ productStore.product?.description }}</p>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum vitae recusandae exercitationem eius aliquam quibusdam fugiat suscipit quasi hic eveniet, non sequi nemo enim, sunt magni laudantium, rerum aliquid. Rem saepe molestias magnam officiis facilis placeat. Eligendi sit tempore sunt, minus, dolore enim odit explicabo fuga corporis, error neque aspernatur? In, quis aperiam? Ipsam, labore dolorum! Facere omnis corporis ratione molestiae, libero hic, repudiandae praesentium dolorum temporibus expedita voluptas velit!</p>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="row">
                         <h4>Product Features</h4>
-                        <p>{{ productStore.product?.features }}</p>
+                        <p>Lorem ipsum dolor sit amet consectetur.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur.</p>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                     <div class="row">
-                        <h4>Felix Omundi - <span>01-14-2023</span> </h4>
-                        <p> <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i></p>
-                        <p class="rev-desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae pariatur illo odio perferendis maxime temporibus repellat veritatis fuga accusamus! Voluptatem?</p>        
-                        <form action="">
-                            <p>Give Your Review</p>
-                            <div class="rating mb-3">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                           <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <input type="text" placeholder="Name" class="form-control">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="email" placeholder="Email" class="form-control">
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <textarea name="review" id="" cols="5" rows="5" placeholder="Review" class="form-control"></textarea>
-                            </div>
-                            <div>
-                                <button class="submit">Submit</button>
-                            </div>
-                           </div>
-                        </form>
+                        <h4>Product Reviews</h4>
                     </div>
                 </div>
                 </div>
@@ -165,7 +121,7 @@ const addToCart = async () => {
 
  </div>
  <!-- product detail -->
- 
+ </div>
  
   <!-- subscribe -->
   <Subscribe></Subscribe>
@@ -174,9 +130,6 @@ const addToCart = async () => {
 <!-- footer -->
 <Footer></Footer>
 <!-- footer-->
-
-
-</div>
 
 </template>
 <style scoped>
@@ -205,7 +158,6 @@ const addToCart = async () => {
       border: 2px solid #088178;
       box-shadow: none;
 }
-
 .product-detail .product .quantity input:focus{
     box-shadow: none;
     outline: none;
@@ -264,49 +216,6 @@ background-color: #088178;
 .prod-tabs .col-12{
     background-color: #ffff;    
     padding-bottom: 10px;
-}
-
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
-.prod-tabs .tab-content{
-    padding: 20px;
-}
-.prod-tabs .tab-content h4{
- font-size: 20px;
- color: #088178;
-}
-.prod-tabs .tab-content h4>span{
-    font-size: 15px;
-    color: grey;
-}
-.prod-tabs .tab-content .row form input,.prod-tabs .tab-content .row form textarea{
-box-shadow: none;
-background-color: #ffff;
-color: black;
-}
-
-.prod-tabs .tab-content .row form input:focus,
-.prod-tabs .tab-content .row form textarea:focus{
-border: 2px solid #088178;
-}
-
-.prod-tabs .tab-content .row form button.submit{
-    cursor: pointer;
-    color: #fff;
-    background-color: #088178;
-    border: none;
-    border-radius: 3px;
-    font-size: 20px;
 
 }
 </style>
