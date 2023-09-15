@@ -9,7 +9,7 @@ let userdata = {
 
 };
 const auth = useauthStore();
-let { loading, authUser } = storeToRefs(auth);
+let { loading } = storeToRefs(auth);
 onMounted(async () => {       
     await auth.getUser();
 
@@ -33,7 +33,8 @@ onMounted(async () => {
                 <div class="form-row">                 
                     <div class="col-md-12 form-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" v-model="userdata.email"  class="form-control">
+                        <input type="email" name="email" v-model="userdata.email"  class="form-control"
+                        :class="{'is-invalid': auth.errors.email}" >
                         <div v-if="auth.errors.email">
                             <span class="text-danger" role="alert"> <strong>
                                 {{ auth.errors.email[0] }}
@@ -43,7 +44,9 @@ onMounted(async () => {
                     </div>
                     <div class="col-md-12 form-group">
                         <label for="password">Password</label>
-                        <input type="password" name="password" v-model="userdata.password" class="form-control">
+                        <input type="password" name="password" v-model="userdata.password" class="form-control" 
+                        :class="{'is-invalid': auth.errors.password}" 
+                        >
                         <div v-if="auth.errors.password">
                             <span class="text-danger" role="alert"> <strong>
                                 {{ auth.errors.password[0] }}

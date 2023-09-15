@@ -1,7 +1,7 @@
 import axios from "axios";
 import { defineStore } from "pinia";
 import router from "../router";
-
+import { useCartStore } from "./cart";
 export const useauthStore = defineStore('auth',  {
     state: () => ({
         authUser:null,        
@@ -24,7 +24,8 @@ export const useauthStore = defineStore('auth',  {
             }
             
         },
-        async login(data) {            
+        async login(data) {   
+            const cart = useCartStore();
             this.errors = [];            
             try {
                 
@@ -32,7 +33,9 @@ export const useauthStore = defineStore('auth',  {
                 this.loading = true;
                 await axios.post("/api/login", data);              
                 this.loading = false;
-                this.errors = [];                                
+                this.errors = [];    
+                await cart.fetchCartItems();
+                await cart.cartTotal();
                 router.push({ name: "home" });
                 
             } catch (error) {                
@@ -55,6 +58,9 @@ export const useauthStore = defineStore('auth',  {
                     this.authUser = response.data;    
                     this.loading = false;  
                     // this.router.push({ name: "home" });
+                    return new Promise((resolve) => {
+                        resolve(response.data);
+                    });
                 }
                  
             } catch (error) {
@@ -67,6 +73,9 @@ export const useauthStore = defineStore('auth',  {
                         this.loading = false;
                         this.authUser = null;                        
                         // this.router.push({ name: "login",  });
+                        return new Promise((reject) => {
+                            reject(error.response.data.errors);
+                        })
                     }       
                 }
                 
@@ -76,7 +85,7 @@ export const useauthStore = defineStore('auth',  {
             try {
                 const response = await axios.post("/api/logout");
                 if (response.status === 204) {
-                    this.authUser = null;
+                    this.authUser = null;                   
                     alert("Logout Successful")
               }                
             } catch (error) {

@@ -15,7 +15,8 @@ const cartStore = useCartStore();
 onMounted(async () => {    
     await auth.getUser();
     await productStore.fetchProduct(slug);
-    await cartStore.fetchCartItems();    
+    await cartStore.fetchCartItems(); 
+    await cartStore.cartTotal();   
 });
 
 let data = {
@@ -25,6 +26,7 @@ let data = {
 
 const addToCart = async () => {
     await cartStore.addToCart(data);
+    await cartStore.fetchCartItems();    
 };
 
 </script>

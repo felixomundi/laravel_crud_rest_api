@@ -16,6 +16,7 @@ Route::middleware(['auth:sanctum'])->group(function (){
 Route::controller(CartController::class)->group(function (){
     Route::get("/cart", "index");
     Route::post("/add-to-cart", "create");
+    Route::get("/cart-total", "total");
 });
 });
 

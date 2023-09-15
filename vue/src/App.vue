@@ -1,20 +1,31 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import { useauthStore } from './stores/auth';
+import { onMounted } from 'vue';
+import {useCartStore} from "./stores/cart"
 const auth = useauthStore();
-const logout = auth.logout;
+const cartStore = useCartStore();
+onMounted(async () => {
+  await cartStore.cartTotal();
+  await cartStore.fetchCartItems();
+});
+
+const logout = async () => {
+  await auth.logout();
+   
+};
 </script>
 
 
 <template>
-  <nav class="navbar navbar-expand-lg bg-light navbar-light sticky-top">
+<nav class="navbar navbar-expand-lg bg-light navbar-light sticky-top">
   <div class="container-fluid">
     <RouterLink class="navbar-brand" to="/">Ecommerce</RouterLink>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
           <RouterLink class="nav-link active" aria-current="page" to="/">Home</RouterLink>
         </li>
@@ -33,8 +44,7 @@ const logout = auth.logout;
           <ul class="dropdown-menu">
             <li><RouterLink class="dropdown-item" to="/profile">Profile</RouterLink></li>
             <li><RouterLink class="dropdown-item" to="#">
-              <button class="btn btn-warning" @click="logout">Logout</button>
-
+              <button class="btn btn-warning" @click.prevent="logout">Logout</button>
             </RouterLink></li>
           </ul>
         </li>
@@ -49,9 +59,14 @@ const logout = auth.logout;
             <li><RouterLink class="dropdown-item" to="/login">Login</RouterLink></li>
           </ul>
         </li>
-        </template> 
-     
+        </template>      
       </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <RouterLink class="nav-link "  to="#"> <img src="./assets/images/cart-icon.png" class="cart-icon" alt="">  {{ cartStore.total }} </RouterLink>
+        </li>
+        </ul>
+     
     </div>
   </div>
 </nav>

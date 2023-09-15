@@ -11,19 +11,20 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     public function index(Request $request){
-        $cartItems = Cart::where("user_id", $request->user()->id)->first();
-        if($cartItems){
-            $cartItems = Cart::where("user_id", $request->user()->id)->get();
-            return response()->json([
-                "status"=>200,
-                "cartItems"=>$cartItems,
-            ],200);
-        }else{
-            return response()->json([
-                "status"=>404,
-                "message"=>"You have an empty cart",
-            ],404);
-        }
+       $cartItems = [];
+       $cart = Cart::where("user_id", $request->user()->id)->first();
+       if($cart){
+           $cartItems = Cart::where("user_id", $request->user()->id)->get();
+           return response()->json([
+               "status"=>200,
+               "cartItems"=>$cartItems,
+           ],200);
+       }else{
+        return response()->json([
+            "status"=>200,
+            "cartItems"=>$cartItems,
+        ],200);
+       }
     }
     public function create(Request $request){
        $user = User::find($request->user()->id);
@@ -66,5 +67,18 @@ class CartController extends Controller
             "message"=>"Login to Continue",
         ],401);
        }
+    }
+    public function total(Request $request){
+
+        $total = 0;
+        $cartItems = Cart::where('user_id', $request->user()->id)->first();
+        if($cartItems){
+            $total = Cart::where('user_id', $request->user()->id)->get()->count();
+        }
+        return response()->json([
+            "status"=>200,
+            "total"=>$total,
+        ],200);
+
     }
 }

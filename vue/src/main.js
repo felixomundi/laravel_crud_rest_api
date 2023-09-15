@@ -14,9 +14,11 @@ import './assets/css/style.css'
 // import { faShopify } from '@fortawesome/free-brands-svg-icons'
 // library.add(faTwitter,faShopify)
 
+import { useauthStore } from "./stores/auth";
 
 const app = createApp(App)
 const pinia = createPinia()
+
 pinia.use(({ store }) => {
     store.router = markRaw(router)
   })
@@ -26,3 +28,6 @@ app.use(router)
 // app.component('font-awesome-icon', FontAwesomeIcon)
 
 app.mount('#app')
+
+
+

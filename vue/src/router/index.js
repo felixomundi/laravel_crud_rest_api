@@ -14,6 +14,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      meta:{ title: "Home"},
       
     },
     {
@@ -74,6 +75,11 @@ const router = createRouter({
   ]
 });
 
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || "Laravel Vue Ecommerce";
+  next();
+})
 
 
 

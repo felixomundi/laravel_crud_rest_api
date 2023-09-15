@@ -39,3 +39,5 @@ php artisan db:seed --class=ProductCategorySeeder
 
 # image crud
 https://www.youtube.com/watch?v=SRnxKpTV-MU&list=PL-OHVhAxtpSBY-X89ewvqbjbAJ-bW4rYk&index=22
+
+axios interceptors
