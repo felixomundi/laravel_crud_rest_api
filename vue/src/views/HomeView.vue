@@ -58,10 +58,10 @@ function getImage() {
 
       <div v-if="productStore.productsLoading" class="row">
         <div>
-          Loading ...
+         <div>Fetching data ...</div>
         </div>
       </div>
-      <div v-else-if="productStore.productErrors" class="row">
+      <div v-else-if="productStore.productErrors || auth.loading" class="row">
       
         <div class="text-center text-danger">
           {{ productStore.productErrors }}

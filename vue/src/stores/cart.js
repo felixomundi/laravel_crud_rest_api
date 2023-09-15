@@ -4,7 +4,8 @@ export const useCartStore = defineStore("cart", {
     state:()=> ({
         cartItems: [],
         cartLoading: false,
-        cartErrors:false,        
+        cartErrors: false,
+        message:null,
     }),
     getters: {
         cart: (state) => state.cartItems,
@@ -21,8 +22,7 @@ export const useCartStore = defineStore("cart", {
           } catch (error) {
               this.cartLoading = false;
               if (error.response) {
-                  if (error.response.status === 404) {
-                      
+                  if (error.response.status === 404) {                     
                     
                 }
             }
@@ -30,14 +30,19 @@ export const useCartStore = defineStore("cart", {
         },
         async addToCart(data) {
             this.cartLoading = true;
-            try {
-               
+            try {               
                 const response = await axios.post("/api/add-to-cart", data);
                 this.cartLoading = false;
-              console.log(response)
+                this.message = response.data.message;  
             } catch (error) {
-                this.cartLoading = false;
-              console.log(error)
+              this.cartLoading = false;             
+              if (error.response) {
+                if (error.response.status === 401) {
+                  this.message = "Please Login to Continue";
+                  alert(this.message);
+                  router.push({ name: "login" });
+                }
+              }
           }  
         },
     },    

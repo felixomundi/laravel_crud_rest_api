@@ -26,7 +26,7 @@ class CartController extends Controller
         }
     }
     public function create(Request $request){
-       $user = User::find(Auth::user()->id);
+       $user = User::find($request->user()->id);
        if($user){
         $product = Product::where("slug",$request->slug)->first();
         if($product){
@@ -63,7 +63,7 @@ class CartController extends Controller
        }else{
         return response()->json([
             "status"=>401,
-            "message"=>"Unauthenticated",
+            "message"=>"Login to Continue",
         ],401);
        }
     }
